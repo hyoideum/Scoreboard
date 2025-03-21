@@ -16,10 +16,10 @@ public class Main {
         scoreboard.startMatch(m5);
 
         scoreboard.setScore(m1, 1, 0);
-        scoreboard.setScore(m2, 1, 0);
-        scoreboard.setScore(m3, 1, 0);
-        scoreboard.setScore(m4, 0, 1);
-        scoreboard.setScore(m5, 0, 1);
+        scoreboard.setScore(m2, 2, 0);
+        scoreboard.setScore(m3, 1, 1);
+        scoreboard.setScore(m4, 3, 1);
+        scoreboard.setScore(m5, 2, 2);
 
         scoreboard.getMatchSummary();
         scoreboard.finishMatch(m1);

@@ -1,22 +1,14 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class Match {
-    public enum Status {
-        ACTIVE,
-        FINISHED
-    }
-
-    private static List<Match> matchList = new ArrayList<>();
-
-    private String home;
-    private String away;
+    private final String home;
+    private final String away;
     private int scoreHome;
     private int scoreAway;
-    private LocalDateTime matchStart;
-    private Status status;
+    private final LocalDateTime matchStart;
+    private final int num;
+
+    private static int counter;
 
     public Match(String home, String away) {
         this.home = home;
@@ -24,9 +16,7 @@ public class Match {
         this.scoreHome = 0;
         this.scoreAway = 0;
         this.matchStart = LocalDateTime.now();
-        this.status = Status.ACTIVE;
-
-        matchList.add(this);
+        this.num = counter++;
     }
 
     public String getHome() {
@@ -45,7 +35,7 @@ public class Match {
         return scoreAway;
     }
 
-    private int getTotalScore() {
+    public int getTotalScore() {
         return scoreHome + scoreAway;
     }
 
@@ -53,8 +43,8 @@ public class Match {
         return matchStart;
     }
 
-    public List<Match> getMatchList() {
-        return matchList;
+    public int getNum() {
+        return num;
     }
 
     public void setScore(int scoreHome, int scoreAway) {
@@ -63,28 +53,5 @@ public class Match {
         }
         this.scoreHome = scoreHome;
         this.scoreAway = scoreAway;
-        SortList();
-    }
-
-    public void finishMatch() {
-        this.status = Status.FINISHED;
-        matchList.remove(this);
-    }
-
-    private void SortList() {
-        matchList.sort(Comparator
-                .comparing(Match::getTotalScore)
-                .thenComparing(Match::getStart)
-                .reversed());
-    }
-
-    public void PrintMatch() {
-        System.out.println(home + " " + scoreHome + " - " + scoreAway + " " + away);
-    }
-
-    public void PrintMatches() {
-        for(Match m : matchList) {
-            m.PrintMatch();
-        }
     }
 }
